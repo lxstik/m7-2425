@@ -13,6 +13,7 @@
         }
 
         #mainContainer {
+            
             border-radius: 8px;
             display: flex;
             margin: 0 auto;
