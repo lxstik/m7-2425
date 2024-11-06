@@ -48,7 +48,6 @@ function generarTabla(&$productos)
 
 
 
-
 function muestraInfoContacto($nombre, $telefono, $foto)
 {
     // Verificar si el formulario se envió
