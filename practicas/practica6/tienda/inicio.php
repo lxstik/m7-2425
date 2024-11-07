@@ -22,18 +22,26 @@
         </div>
 
         <div class="container">
-            <form action="index.php" method="POST">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control">
-
-                <label for="telefono" class="form-label">Número de Teléfono</label>
-                <input type="number" id="telefono" name="telefono" class="form-control">
-
-                <label for="imagen" class="form-label">URL de foto</label>
-                <input type="text" id="imagen" name="imagen" class="form-control">
-
-                <a href="index.php"><button type="submit" class="btn btn-primary btn-lg">Enviar</button></a>
+            <!-- Formulario para agregar productos -->
+            <form method="POST" action="index.php">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="precio" name="precio" required step="0.01">
+                </div>
+                <div class="mb-3">
+                    <label for="disponibilidad" class="form-label">Disponibilidad</label>
+                    <select class="form-select" id="disponibilidad" name="disponibilidad">
+                        <option value="true">En stock</option>
+                        <option value="false">No hay en stock</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
             </form>
+
         </div>
     </div>
 

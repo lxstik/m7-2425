@@ -12,17 +12,21 @@
 } -->
 
 <?php
+
 function generarTabla(&$productos)
 {
-    // Si se recibe una solicitud POST, agregar un nuevo producto
+    // agregar productos si se reciben datos con metodo post
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Recibir los datos del nuevo producto
         $productoNuevo = [
             "nombre" => $_POST['nombre'],
             "precio" => $_POST['precio'],
-            "disponibilidad" => $_POST['disponibilidad']
+            "disponibilidad" => $_POST['disponibilidad'],
         ];
     }
+
+
+
+
 
     // mostrar la tabla
     echo "<table class='table table-bordered'>
@@ -37,10 +41,20 @@ function generarTabla(&$productos)
 
     foreach ($productos as $producto) {
         echo "<tr>
-                <td>" . htmlspecialchars($producto['nombre']) . "</td>
-                <td>" . number_format($producto['precio'], 2) . "</td>
-                <td>" . htmlspecialchars($producto['disponibilidad']) . "</td>
-              </tr>";
+                <td>" . $producto['nombre'] . "</td>
+                <td>" . $producto['precio'] . "</td>";
+
+        if ($producto['disponibilidad'] == true) {
+            echo "
+                        <td>Hay en stock</td>
+                    ";
+        } else {
+            echo "
+                        <td>No hay en stock</td>
+                    ";
+        }
+
+        echo "</tr>";
     }
 
     echo "</tbody></table>";
@@ -50,9 +64,8 @@ function generarTabla(&$productos)
 
 function muestraInfoContacto($nombre, $telefono, $foto)
 {
-    // Verificar si el formulario se envió
+    // verificar si se mando furmulario con el boton
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Obtener los datos del formulario
         $nombre = $_POST['nombre'];
         $telefono = $_POST['telefono'];
         $imagen = $_POST['imagen'];
@@ -62,7 +75,10 @@ function muestraInfoContacto($nombre, $telefono, $foto)
     echo "
         <h1>Hola, $nombre</h1>
         <p>Su número de teléfono es: $telefono</p>
-        <img src='$imagen' alt='Foto de $nombre'>
+        <img src='$imagen'>
     ";
 }
+
+
+
 ?>
