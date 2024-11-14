@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['dificultat'] = $_POST['dificultat'];
+
+    header('Location:rooms/room1.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +22,14 @@ session_start();
 <body class="d-flex justify-content-center align-items-center vh-100" style="background-image: url('https://basementescaperoom.com/los-angeles/template/images/room-header-bg-thebasement.jpg'); background-size:cover; background-repeat: no-repeat;">
     <div class="card p-4 bg-dark text-white" style="width: 22rem;">
         <h2 class="card-title text-center">Benvingut!</h2>
-        <form>
+        <form action="index.php" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Nom:</label>
                 <input type="text" name="username" id="username" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="dificultat" class="form-label">Nivell de Dificultat:</label>
-                <select name="" id="dificultat" class="form-select" required>
+                <select name="dificultat" id="dificultat" class="form-select" required>
                     <option value="">Selecciona un nivell</option>
                     <option value="facil">Fàcil</option>
                     <option value="mig">Mig</option>
