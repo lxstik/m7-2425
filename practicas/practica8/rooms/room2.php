@@ -1,14 +1,19 @@
 <?php
 session_start();
+include "../funciones.php";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['dificultat'] = $_POST['dificultat'];
+$userAnswer = $_POST['answer'];
+$correctAnswer = $adivinanzas[$_SESSION['dificultat']][1]['respuesta'];
 
-    header('Location:room3.php');
+if (isset($userAnswer) && !empty($userAnswer)) {
+    if (strcasecmp($userAnswer, $correctAnswer) === 0) {
+        header('Location:room3.php');
+        exit;
+    } else {
+        $message = 'Falso';
+    }
 }
 
-include "../funciones.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -22,15 +27,21 @@ include "../funciones.php";
 
 <body class="d-flex justify-content-center align-items-center vh-100">
     <div class="card p-4" style="width: 22rem;">
+        <?php
+        echo "
+            <h1>Hola, {$_SESSION['username']}</h1>
+            <h2>Nivel de dificultad: {$_SESSION['dificultat']}</h2>
+        "
+        ?>
         <h2 class="card-title text-center">Habitación 2</h2>
-        <p class="card-text">Endevinalla: Tengo ciudades, pero no casas. Tengo montañas, pero no árboles. Tengo agua, pero no peces. ¿Qué soy?</p>
+        <p class="card-text"><?php echo $adivinanzas[$_SESSION['dificultat']][1]['pregunta']; ?></p>
         <form method="POST">
             <div class="mb-3">
                 <input type="text" name="answer" class="form-control" required placeholder="Respuesta">
             </div>
             <button type="submit" class="btn btn-success w-100">Enviar</button>
         </form>
-        <?= $message; ?> <!-- Muestra el mensaje de éxito o error -->
+        <?= $message ?>
     </div>
 </body>
 

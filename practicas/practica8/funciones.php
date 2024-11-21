@@ -25,7 +25,7 @@ $adivinanzas = [
         ],
     ],
 
-    "medio" => [
+    "mig" => [
         [
             "pregunta" => "Largo cuando soy joven, corto cuando soy viejo. ¿Qué soy?",
             "respuesta" => "Una vela"
@@ -71,24 +71,3 @@ $adivinanzas = [
         ],
     ],
 ];
-
-$i = 0;
-
-function pregunta_facil_generar($adivinanzas, $i)
-{
-    echo "<p>" . $adivinanzas['facil'][$i]['pregunta'] . "</p>";
-}
-
-function pregunta_facil_verificar($adivinanzas, $i, $respuesta)
-{
-    $correcto = false;
-
-    if ($_SESSION['respuesta'] == $adivinanzas['facil'][$i]['respuesta']) {
-        echo "correcto";
-        $found = true;
-    }
-
-    if ($found = false) {
-        echo "intenta de nuevo";
-    }
-}

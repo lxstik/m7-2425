@@ -2,16 +2,19 @@
 session_start();
 include "../funciones.php";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['dificultat'] = $_POST['dificultat'];
-    $_SESSION['respuesta'] = $_POST['answer'];
+$userAnswer = $_POST['answer'];
+$correctAnswer = $adivinanzas[$_SESSION['dificultat']][0]['respuesta'];
 
 
-
-    header('Location:room2.php');
-
+if (isset($userAnswer) && !empty($userAnswer)) {
+    if (strcasecmp($userAnswer, $correctAnswer) === 0) {
+        header('Location:room2.php');
+        exit;
+    } else {
+        $message = 'Falso';
+    }
 }
+
 
 
 ?>
@@ -35,13 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "
         ?>
         <h2 class="card-title text-center">Habitación 1</h2>
-        <p class="card-text"><?php pregunta_facil_generar($adivinanzas, $respuesta); ?></p>
+        <p class="card-text"><?php echo $adivinanzas[$_SESSION['dificultat']][0]['pregunta']; ?></p>
         <form method="POST">
             <div class="mb-3">
                 <input type="text" name="answer" class="form-control" required placeholder="Respuesta">
             </div>
             <button type="submit" class="btn btn-success w-100">Enviar</button>
         </form>
+        <?= $message; ?>
     </div>
 </body>
 
