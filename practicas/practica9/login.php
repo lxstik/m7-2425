@@ -4,13 +4,34 @@ session_start();
 // Datos de usuario predefinidos (esto normalmente se obtendría de una base de datos).
 $usuarios = [
     ["username" => "admin", "password" => "adminpass", "role" => "admin"],
-    ["username" => "reader", "password" => "readerpass", "role" => "lector"]
+    ["username" => "reader", "password" => "readerpass", "role" => "lector"],
+    ["username" => "alumno", "password" => "alumnopass", "role" => "lector"],
+    ["username" => "yehor", "password" => "yehorpass", "role" => "admin"]
 ];
 
 // Procesamiento del formulario.
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['password'] = $_POST['password'];
+    $_SESSION['photo'] = $_POST['photo'];
 
+    if (isset($_POST['username'])  && isset($_POST['password'])) {
+        foreach ($usuarios as $usuario) {
+            if ($usuario['username'] == $_POST['username'] && $usuario['password'] == $_POST['password']) {
+                $_SESSION['username'] = $_POST['username'];
+                $_SESSION['role'] = $usuario['role'];
+                $_SESSION['photo'] = $_POST['photo'];
+                header('Location:home.php');
+                exit;
+            } else {
+                $credIncorrecto = 'Usuario o contraseña son incorrectos';
+            }
+        }
+    }
+}
 // Validación de credenciales.
+
 
 
 
@@ -38,17 +59,17 @@ $usuarios = [
         <div class="signin">
             <div class="content text-center">
                 <h2>Inicia sesión</h2>
-                <form method="xxxxx" action="login.php">
+                <form method="post" action="login.php">
                     <div class="inputBox ">
-                        <input class="p-2 m-2" placeholder="Username" type="text" name="" required>
+                        <input class="p-2 m-2" placeholder="Username" type="text" name="username" id="username" required>
 
                     </div>
                     <div class="inputBox ">
-                        <input class="p-2 m-2" placeholder="Password" type="password" name="" required>
+                        <input class="p-2 m-2" placeholder="Password" type="password" name="password" id="password" required>
 
                     </div>
                     <div class="inputBox ">
-                        <input class="p-2 m-2" placeholder="Foto de perfil" type="text" name="" required>
+                        <input class="p-2 m-2" placeholder="Foto de perfil" type="text" name="photo" id="photo" required>
 
                     </div>
                     <?php if (!empty($error)) : ?>
@@ -59,6 +80,7 @@ $usuarios = [
                         <input class="bg-warning btn mt-2" type="submit" value="Iniciar">
                     </div>
                 </form>
+                <?= $credIncorrecto; ?>
             </div>
         </div>
     </section>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 // Verifica si el usuario ha iniciado sesión; si no, redirige a login.php.
 
@@ -25,14 +25,16 @@
     <header class="bg-light py-3 mb-4 shadow-sm">
         <div class="container d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img src="aqui va la foto de perfil" alt="Foto de perfil" class="w-25 rounded-circle me-3">
+                <img src="<?= $_SESSION['photo']; ?>" alt="Foto de perfil" class="w-25 rounded-circle me-3">
                 <div>
-                    <h4 class="m-0">👋 Bienvenido, AQUÍ VA EL USUARIO!</h4>
-                    <!-- SI ES ADMIN.... -->
-                    <p class="text-muted m-0"><i class="fas fa-user-shield text-success"></i> Admin ✏️</p>
-                    <!-- SINO.... -->
-                    <p class="text-muted m-0">Lector 📚</p>
-
+                    <h4 class="m-0">👋 Bienvenido, <?= $_SESSION['username']; ?></h4>
+                    <?php
+                    if ($_SESSION['role'] == 'admin') {
+                        echo '<p class="text-muted m-0"><i class="fas fa-user-shield text-success"></i> Admin ✏️</p>';
+                    } else {
+                        echo '<p class="text-muted m-0">Lector 📚</p>';
+                    }
+                    ?>
                 </div>
             </div>
             <a href="" class="btn btn-warning btn-sm">
