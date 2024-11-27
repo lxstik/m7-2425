@@ -1,12 +1,6 @@
 <?php
 session_start();
-
-// Verifica si el usuario ha iniciado sesión; si no, redirige a login.php.
-
-// Verifica el rol del usuario
-
-// Obtener la lista de libros desde la sesión
-
+include 'functions.php'; // Incluye el archivo con los datos de los libros
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +14,6 @@ session_start();
 </head>
 
 <body>
-
     <!-- Encabezado del usuario -->
     <header class="bg-light py-3 mb-4 shadow-sm">
         <div class="container d-flex align-items-center justify-content-between">
@@ -30,14 +23,18 @@ session_start();
                     <h4 class="m-0">👋 Bienvenido, <?= $_SESSION['username']; ?></h4>
                     <?php
                     if ($_SESSION['role'] == 'admin') {
-                        echo '<p class="text-muted m-0"><i class="fas fa-user-shield text-success"></i> Admin ✏️</p>';
+                        echo '
+                            <p class="text-muted m-0"><i class="fas fa-user-shield text-success"></i> Admin ✏️</p>
+                        ';
                     } else {
-                        echo '<p class="text-muted m-0">Lector 📚</p>';
+                        echo '
+                            <p class="text-muted m-0">Lector 📚</p>
+                        ';
                     }
                     ?>
                 </div>
             </div>
-            <a href="" class="btn btn-warning btn-sm">
+            <a href="logout.php" class="btn btn-warning btn-sm">
                 Cerrar sesión ❌
             </a>
         </div>
@@ -49,40 +46,48 @@ session_start();
             <p class="lead">Disfruta explorando nuestra colección de libros</p>
         </div>
 
-        <!-- Botón de agregar libro (solo visible para el admin) -->
-
-        <div class="text-center mb-4">
-            <a href="add_edit_book.php" class="btn btn-outline-success btn-lg">
-                <i class="fas fa-plus-circle me-2"></i>Agregar Nuevo Libro
-            </a>
-        </div>
-
+        <?php
+        if ($_SESSION['role'] == 'admin') {
+            echo '
+                <div class="text-center mb-4">
+                    <a href="add_edit_book.php" class="btn btn-outline-success btn-lg">
+                        <i class="fas fa-plus-circle me-2"></i>Agregar Nuevo Libro
+                    </a>
+                </div>
+            ';
+        } ?>
 
         <!-- Mostrar lista de libros en un grid de tarjetas con tamaño uniforme -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <?php
+            foreach ($_SESSION['libros'] as $libro) {
+                echo '
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <img src="' . $libro['url_imagen'] . '" class="card-img-top" alt="' . $libro['titulo'] . '" style="height: 400px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">' . $libro['titulo'] . '</h5>
+                                <p class="card-text"><strong>Autor:</strong> ' . $libro['autor'] . '</p>
+                                <p class="card-text">' . $libro['descripcion'] . '</p>
+                            </div>';
 
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    <img src="" class="card-img-top" alt="" style="height: 400px; object-fit: cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">TITULO</h5>
-                        <p class="card-text"><strong>Autor:</strong> AUTOR</p>
-                        <p class="card-text">DESCRIPCIÓN</p>
+                if ($_SESSION['role'] === 'admin') {
+                    echo '
+                                    <div class="card-footer d-flex justify-content-between">
+                                        <a href="edit_book.php?id=' . $libro['titulo'] . '" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </a>
+                                        <a href="delete_book.php?id=' . $libro['titulo'] . '" class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash-alt"></i> Eliminar
+                                        </a>
+                                    </div>
+                                ';
+                }
+                echo '
+                        </div>
                     </div>
-
-                    <!-- Botones de editar y eliminar (solo visible para el admin) -->
-                    <div class="card-footer d-flex justify-content-between">
-                        <a href="" class="btn btn-outline-primary btn-sm">
-                            <i class="fas fa-edit"></i> Editar
-                        </a>
-                        <a href="" class="btn btn-outline-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-
+                ';
+            } ?>
         </div>
     </div>
 
