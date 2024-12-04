@@ -36,6 +36,6 @@ $libros = [
 ];
 
 //generar una copia del array para tranajar sobre el 
-if (!isset($_SESSION["libros"])) {
-    $_SESSION["libros"] = $libros;
+if (!isset($_SESSION["libross"])) {
+    $_SESSION["libross"] = $libros;
 }

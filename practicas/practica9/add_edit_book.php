@@ -4,7 +4,7 @@ include 'functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //añadir el libro al array de funciones.php
-    array_push($_SESSION['libros'], [
+    array_push($_SESSION['libross'], [
         "titulo" => $_POST['titulo'],
         "autor" => $_POST['autor'],
         "url_imagen" => $_POST['url_imagen'],

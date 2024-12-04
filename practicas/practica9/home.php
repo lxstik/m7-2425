@@ -60,7 +60,7 @@ include 'functions.php'; // Incluye el archivo con los datos de los libros
         <!-- Mostrar lista de libros en un grid de tarjetas con tamaño uniforme -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <?php
-            foreach ($_SESSION['libros'] as $libro) {
+            foreach ($_SESSION['libross'] as $libro) {
                 echo '
                     <div class="col">
                         <div class="card h-100 shadow-sm">
