@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'functions.php'; // Incluye el archivo con los datos de los libros
+include 'functions.php';
 ?>
 
 <!DOCTYPE html>
