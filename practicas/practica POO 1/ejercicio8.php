@@ -12,22 +12,22 @@ class Calculadora
         $this->segundoNum = $segundoNum;
     }
 
-    public function sumar(): int
+    public function sumar()
     {
         return $this->primerNum + $this->segundoNum;
     }
 
-    public function restar(): int
+    public function restar()
     {
         return $this->primerNum - $this->segundoNum;
     }
 
-    public function multiplicar(): int
+    public function multiplicar()
     {
         return $this->primerNum * $this->segundoNum;
     }
 
-    public function dividir(): float
+    public function dividir()
     {
         return $this->primerNum / $this->segundoNum;
     }
