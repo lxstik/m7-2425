@@ -4,7 +4,7 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['numeroJugadores'] = $_POST['numeroJugadores'];
     $_SESSION['cartasPorJugador'] = $_POST['cartasPorJugador'];
-    header('Location:partida.php');
+    header('Location:juego.php');
 }
 ?>
 
