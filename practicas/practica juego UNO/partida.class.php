@@ -2,8 +2,6 @@
 session_start();
 include_once "./baraja.class.php";
 
-
-
 class Partida {
     public $numero_jugadores;
     public $numero_cartas;

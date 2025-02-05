@@ -13,15 +13,13 @@ class Carta
         $this->index = $index;
     }
 
+
+    public function pinta_carta()
+    {
+        return "<img src='cartas_uno/{$this->numero}_{$this->palo}.png' alt='{$this->numero} {$this->palo}' />";
+    }
     public function pinta_carta_link()
     {
-        echo '<form method="GET">';
-        echo '<input type="hidden" name="color" value="' . $this->palo . '">';
-        echo '<input type="hidden" name="numero" value="' . $this->numero . '">';
-        echo '<button type="submit" style="border: none; background: none;">';
-        echo '<img src="./cartas_uno/' . $this->numero . '_' . $this->palo . '.png" alt="Carta ' . $this->index . ' ' . $this->palo . '">';
-        echo '</button>';
-        echo '</form>';
+        return "<a href='juego.php?num={$this->numero}&palo={$this->palo} '><img src='cartas_uno/{$this->numero}_{$this->palo}.png' alt='{$this->numero} {$this->palo}' /></a> ";
     }
 }
-?>
