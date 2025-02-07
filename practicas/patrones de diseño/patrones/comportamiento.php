@@ -5,6 +5,7 @@ include("../componentes/nav.php");
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@ include("../componentes/nav.php");
             background-color: white;
             color: #e74c3c;
         }
+
         .card {
             border: 2px solid #e74c3c;
             height: auto;
@@ -22,26 +24,32 @@ include("../componentes/nav.php");
             margin: 0 auto;
             padding: 20px;
         }
+
         .card-title {
             color: #e74c3c;
         }
+
         .btn-custom {
             background-color: #e74c3c;
             color: white;
         }
+
         .btn-custom:hover {
             background-color: #c0392b;
         }
+
         .card-body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
+
         .lead {
             margin-top: 10px;
             font-size: 16px;
         }
+
         .description {
             display: none;
             margin-top: 20px;
@@ -54,11 +62,12 @@ include("../componentes/nav.php");
         }
 
 
-        select:focus + .description {
+        select:focus+.description {
             display: block;
         }
     </style>
 </head>
+
 <body>
     <div class="container text-center mt-5">
         <div class="card">
@@ -131,7 +140,7 @@ include("../componentes/nav.php");
                 <div class="description" id="description-template">
                     <h5>Template Method</h5>
                     <p>Define el esqueleto de un algoritmo en la superclase pero permite que las subclases sobrescriban pasos del algoritmo.</p>
-                    <a href="./comportamiento-TemplateMethod" class="btn btn-custom">Ver más</a>
+                    <a href="./comportamiento-TemplateMethod.php" class="btn btn-custom">Ver más</a>
                 </div>
 
                 <div class="description" id="description-visitor">
@@ -158,4 +167,5 @@ include("../componentes/nav.php");
         }
     </script>
 </body>
+
 </html>
